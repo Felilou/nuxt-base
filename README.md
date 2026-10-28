@@ -4,11 +4,13 @@ Basis-Layer für Kunden-Websites: Nuxt UI, Nuxt Content (CMS), Nuxt SEO, Nuxt Im
 
 ## Neues Kundenprojekt
 
+Am einfachsten über die Vorlage: [Felilou/nuxt-starter](https://github.com/Felilou/nuxt-starter), dort „Use this template“. Manuell geht es so:
+
 1. Nuxt-Projekt anlegen (`npm create nuxt@latest`) und diese Pakete installieren: `@nuxt/content`, `@nuxt/ui`, `@nuxtjs/seo` und `@nuxt/image`.
 2. `nuxt.config.ts`:
    ```ts
    export default defineNuxtConfig({
-     extends: ['github:<user>/nuxt-base'], // bzw. '../nuxt-base' lokal
+     extends: ['github:Felilou/nuxt-base#v0.1.0'], // bzw. '../nuxt-base' lokal
      site: {
        url: 'https://kunde.at',
        name: 'Kunde GmbH'
@@ -30,7 +32,7 @@ Alles aus dem Layer (Komponenten, Layouts, Seiten) kann im Projekt durch eine Da
 1. `npm install nuxt-studio`
 2. Zusätzlich den Studio-Layer einbinden:
    ```ts
-   extends: ['github:<user>/nuxt-base', 'github:<user>/nuxt-base/studio']
+   extends: ['github:Felilou/nuxt-base#v0.1.0', 'github:Felilou/nuxt-base/studio#v0.1.0']
    ```
 3. Mit `nuxt build` bauen, **nicht** mit `generate`, und bei einem Hoster mit SSR- bzw. Serverless-Support deployen (Netlify, Vercel, ...). Die Seiten werden trotzdem als statisches HTML vorgerendert. Nur der Login läuft serverseitig.
 4. Env-Variablen beim Hoster setzen (Login per Google, Kunde braucht kein GitHub-Konto):
