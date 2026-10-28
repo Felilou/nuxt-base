@@ -25,6 +25,26 @@ Alles aus dem Layer (Komponenten, Layouts, Seiten) kann im Projekt durch eine Da
 - `nuxt build`: SSR, Start mit `node .output/server/index.mjs`. Läuft auch serverless (Vercel, Netlify, ...).
 - `nuxt generate`: rein statisch, für jeden Static-Hoster.
 
+## Optional: Nuxt Studio (für Kunden, die selbst editieren)
+
+1. `npm install nuxt-studio`
+2. Zusätzlich den Studio-Layer einbinden:
+   ```ts
+   extends: ['github:<user>/nuxt-base', 'github:<user>/nuxt-base/studio']
+   ```
+3. Mit `nuxt build` bauen, **nicht** mit `generate`, und bei einem Hoster mit SSR- bzw. Serverless-Support deployen (Netlify, Vercel, ...). Die Seiten werden trotzdem als statisches HTML vorgerendert. Nur der Login läuft serverseitig.
+4. Env-Variablen beim Hoster setzen (Login per Google, Kunde braucht kein GitHub-Konto):
+   ```
+   NUXT_STUDIO_AUTH_GOOGLE_CLIENT_ID=...
+   NUXT_STUDIO_AUTH_GOOGLE_CLIENT_SECRET=...
+   NUXT_STUDIO_AUTH_GOOGLE_MODERATORS=kunde@firma.at,du@deine-mail.at
+   NUXT_STUDIO_GIT_GITHUB_TOKEN=...   # Fine-grained PAT: nur dieses Repo, Contents read/write
+   ```
+   Redirect-URI im Google OAuth Client: `https://<domain>/__nuxt_studio/auth/google`
+5. Bearbeitet wird unter `https://<domain>/_studio`. „Veröffentlichen“ erzeugt einen Commit, und der Hoster baut neu.
+
+Auf Netlify, Vercel und GitHub Actions wird das Repo automatisch erkannt. Bei anderen Hostern setzt du `studio.repository` (`owner`, `repo`, `branch`) im Projekt.
+
 ## Monitoring
 
 Jede Seite liefert unter `/health.json` folgende Daten:
