@@ -1,5 +1,5 @@
 // Optional layer for clients who edit content themselves via Nuxt Studio.
-// Use it together with the base layer: `extends: ['github:Felilou/nuxt-base#v0.1.0', 'github:Felilou/nuxt-base/studio#v0.1.0']`.
+// Use it together with the base layer: `extends: ['github:Felilou/nuxt-base#v0.2.0', 'github:Felilou/nuxt-base/studio#v0.2.0']`.
 //
 // Studio's login needs a server route, so sites using this layer must be built with `nuxt build`
 // (not `generate`) and hosted with SSR/serverless support. Pages are still prerendered to static HTML.
