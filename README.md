@@ -29,7 +29,7 @@ Alles aus dem Layer (Komponenten, Layouts, Seiten) kann im Projekt durch eine Da
 
 ## Optional: Nuxt Studio (für Kunden, die selbst editieren)
 
-1. `npm install nuxt-studio`
+1. `npm install nuxt-studio`. Im Projekt muss **TypeScript 5.x** installiert sein (`"typescript": "^5.9.3"`). Mit TypeScript 7 zeigt Studio beim Klick auf einen Baustein kein Formular an.
 2. Zusätzlich den Studio-Layer einbinden:
    ```ts
    extends: ['github:Felilou/nuxt-base#v0.1.0', 'github:Felilou/nuxt-base/studio#v0.1.0']
@@ -44,6 +44,8 @@ Alles aus dem Layer (Komponenten, Layouts, Seiten) kann im Projekt durch eine Da
    ```
    Redirect-URI im Google OAuth Client: `https://<domain>/__nuxt_studio/auth/google`
 5. Bearbeitet wird unter `https://<domain>/_studio`. „Veröffentlichen“ erzeugt einen Commit, und der Hoster baut neu.
+
+Der Studio-Layer bietet dem Kunden nur die Bausteine aus `app/components/content/` des Projekts zum Einfügen an. Ein Klick auf einen Baustein öffnet ein Formular mit dessen Props. Nur diese Bausteine werden analysiert, das hält den Dev-Start schnell.
 
 Auf Netlify, Vercel und GitHub Actions wird das Repo automatisch erkannt. Bei anderen Hostern setzt du `studio.repository` (`owner`, `repo`, `branch`) im Projekt.
 

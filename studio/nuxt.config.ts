@@ -14,9 +14,23 @@ export default defineNuxtConfig({
       commit: {
         messagePrefix: 'content:'
       }
+    },
+    // Clients only get the project's blocks from app/components/content/, not the raw Nuxt UI
+    // components they could rebuild the layout with
+    editor: {
+      components: {
+        include: ['**/components/content/**']
+      }
     }
     // `repository` (owner/repo/branch) is auto-detected on Netlify, Vercel and GitHub Actions;
     // set it in the client project for other hosts.
+  },
+
+  // Studio builds the prop form of a block from component metadata. Parse only the blocks:
+  // parsing every Nuxt UI component as well roughly doubles dev startup.
+  // Needs TypeScript 5.x in the project; TS 7 lacks the API vue-component-meta uses, so no forms appear.
+  componentMeta: {
+    exclude: [(component: { filePath: string }) => !component.filePath.replaceAll('\\', '/').includes('components/content/')]
   },
 
   nitro: {
